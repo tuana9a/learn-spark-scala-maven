@@ -1,7 +1,7 @@
 package com.tuana9a.tests
 
-import com.tuana9a.{Helper, Main}
-import com.tuana9a.model.UserData
+import com.tuana9a.Helper
+import com.tuana9a.model.data.UserData
 import org.apache.spark.sql.SparkSession
 
 object TestParquet {
@@ -45,10 +45,49 @@ object TestParquet {
     val spark = SparkSession.builder.appName("test").getOrCreate()
     import spark.implicits._
     val milliseconds = System.currentTimeMillis()
+    val timestamp1 = Helper.genTimestamp(milliseconds)
+    val timestamp2 = Helper.genTimestamp(milliseconds + 1000)
+    val timestamp3 = Helper.genTimestamp(milliseconds + 2000)
     val data = Seq(
-      UserData(Helper.genTimestamp(milliseconds), 1, "Tuan1", "Nguyen Minh", "tuana9a@gmail.com", "Male", "192.168.244.128", null, "Hanoi", null, null, null, null),
-      UserData(Helper.genTimestamp(milliseconds + 1000), 2, "Tuan2", "Nguyen Minh", "tuana9a@gmail.com", "Male", "192.168.244.128", null, "Hanoi", null, null, null, null),
-      UserData(Helper.genTimestamp(milliseconds + 2000), 3, "Tuan3", "Nguyen Minh", "tuana9a@gmail.com", "Male", "192.168.244.128", null, "Hanoi", null, null, null, null),
+      UserData(timestamp1, 1
+        , "Tuan1"
+        , null
+        , null
+        , null
+        , null
+        , null
+        , null
+        , null
+        , 0
+        , null
+        , null
+      ),
+      UserData(timestamp2, 2, "Tuan2"
+        , null
+        , null
+        , null
+        , null
+        , null
+        , null
+        , null
+        , 0
+        , null
+        , null
+      ),
+      UserData(timestamp3
+        , 3
+        , "Tuan3"
+        , null
+        , null
+        , null
+        , null
+        , null
+        , null
+        , null
+        , 0
+        , null
+        , null
+      ),
     )
     val rdd = spark.sparkContext.parallelize(data)
     val df = rdd.toDF()
@@ -62,10 +101,13 @@ object TestParquet {
     val spark = SparkSession.builder.appName("test").getOrCreate()
     import spark.implicits._
     val milliseconds = System.currentTimeMillis()
+    val timestamp1 = Helper.genTimestamp(milliseconds)
+    val timestamp2 = Helper.genTimestamp(milliseconds + 1000)
+    val timestamp3 = Helper.genTimestamp(milliseconds + 2000)
     val data = Seq(
-      UserData(Helper.genTimestamp(milliseconds), 5, "Tuan1", "Nguyen Minh", "tuana9a@gmail.com", "Male", "192.168.244.128", null, "Hanoi", null, null, null, null),
-      UserData(Helper.genTimestamp(milliseconds + 1000), 6, "Tuan2", "Nguyen Minh", "tuana9a@gmail.com", "Male", "192.168.244.128", null, "Hanoi", null, null, null, null),
-      UserData(Helper.genTimestamp(milliseconds + 2000), 7, "Tuan3", "Nguyen Minh", "tuana9a@gmail.com", "Male", "192.168.244.128", null, "Hanoi", null, null, null, null),
+      UserData(timestamp1, 1, "Tuan1", null, null, null, null, null, null, null, 0, null, null),
+      UserData(timestamp2, 2, "Tuan2", null, null, null, null, null, null, null, 0, null, null),
+      UserData(timestamp3, 3, "Tuan3", null, null, null, null, null, null, null, 0, null, null),
     )
     val rdd = spark.sparkContext.parallelize(data)
     val df = rdd.toDF()
@@ -80,20 +122,26 @@ object TestParquet {
     import spark.implicits._
     val milliseconds = System.currentTimeMillis()
 
+    val timestamp1 = Helper.genTimestamp(milliseconds)
+    val timestamp2 = Helper.genTimestamp(milliseconds + 1000)
+    val timestamp3 = Helper.genTimestamp(milliseconds + 2000)
     val data = Seq(
-      UserData(Helper.genTimestamp((milliseconds - Math.random() * 604800000).toLong), 1, "Tuan1", "Nguyen Minh", "tuana9a@gmail.com", "Male", "192.168.244.128", null, "Hanoi", null, null, null, null),
-      UserData(Helper.genTimestamp((milliseconds - Math.random() * 604800000).toLong), 2, "Tuan2", "Nguyen Minh", "tuana9a@gmail.com", "Male", "192.168.244.128", null, "Hanoi", null, null, null, null),
-      UserData(Helper.genTimestamp((milliseconds - Math.random() * 604800000).toLong), 3, "Tuan3", "Nguyen Minh", "tuana9a@gmail.com", "Male", "192.168.244.128", null, "Hanoi", null, null, null, null),
+      UserData(timestamp1, 1, "Tuan1", null, null, null, null, null, null, null, 0, null, null),
+      UserData(timestamp2, 2, "Tuan2", null, null, null, null, null, null, null, 0, null, null),
+      UserData(timestamp3, 3, "Tuan3", null, null, null, null, null, null, null, 0, null, null)
     )
     val rdd = spark.sparkContext.parallelize(data)
     val df = rdd.toDF()
     df.write.mode("overwrite").parquet("user-data-1.parquet")
 
     for (i <- Range(0, 100)) {
+      val timestamp1 = Helper.genTimestamp(milliseconds)
+      val timestamp2 = Helper.genTimestamp(milliseconds + 1000)
+      val timestamp3 = Helper.genTimestamp(milliseconds + 2000)
       val data = Seq(
-        UserData(Helper.genTimestamp((milliseconds - Math.random() * 604800000).toLong), 1, "Tuan1", "Nguyen Minh", "tuana9a@gmail.com", "Male", "192.168.244.128", null, "Hanoi", null, null, null, null),
-        UserData(Helper.genTimestamp((milliseconds - Math.random() * 604800000).toLong), 2, "Tuan2", "Nguyen Minh", "tuana9a@gmail.com", "Male", "192.168.244.128", null, "Hanoi", null, null, null, null),
-        UserData(Helper.genTimestamp((milliseconds - Math.random() * 604800000).toLong), 3, "Tuan3", "Nguyen Minh", "tuana9a@gmail.com", "Male", "192.168.244.128", null, "Hanoi", null, null, null, null),
+        UserData(timestamp1, 1, "Tuan1", null, null, null, null, null, null, null, 0, null, null),
+        UserData(timestamp2, 2, "Tuan2", null, null, null, null, null, null, null, 0, null, null),
+        UserData(timestamp3, 3, "Tuan3", null, null, null, null, null, null, null, 0, null, null)
       )
       val rdd = spark.sparkContext.parallelize(data)
       val df = rdd.toDF()
@@ -111,10 +159,23 @@ object TestParquet {
     for (_ <- Range(0, 100)) {
       var temp = Seq[UserData]()
       for (_ <- Range(0, 10)) {
-        val random = (milliseconds - Math.random() * 604800000).toLong
+        val random = (milliseconds - Math.random() * 604800000).toInt
         val timestamp = Helper.genTimestamp(random)
         val id = Helper.genId(random)
-        temp = temp :+ UserData(timestamp, id, "Tuan" + id, null, null, null, null, null, null, null, null, null, null)
+        temp = temp :+ UserData(timestamp
+          , id
+          , "Tuan" + id
+          , null
+          , null
+          , null
+          , null
+          , null
+          , null
+          , null
+          , 0
+          , null
+          , null
+        )
       }
       rdd = rdd.++(spark.sparkContext.parallelize(temp))
     }
@@ -131,10 +192,23 @@ object TestParquet {
     var data = Seq[UserData]()
     for (_ <- Range(0, 100)) {
       for (_ <- Range(0, 10)) {
-        val random = (milliseconds - Math.random() * 604800000).toLong
+        val random = (milliseconds - Math.random() * 604800000).toInt
         val timestamp = Helper.genTimestamp(random)
         val id = Helper.genId(random)
-        data = data :+ UserData(timestamp, id, "Tuan" + id, null, null, null, null, null, null, null, null, null, null)
+        data = data :+ UserData(timestamp
+          , id
+          , "Tuan" + id
+          , null
+          , null
+          , null
+          , null
+          , null
+          , null
+          , null
+          , 0
+          , null
+          , null
+        )
       }
     }
     val df = spark.sparkContext.parallelize(data).toDF()

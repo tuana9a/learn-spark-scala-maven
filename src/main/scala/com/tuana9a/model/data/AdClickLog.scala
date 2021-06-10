@@ -1,4 +1,4 @@
-package com.tuana9a.model
+package com.tuana9a.model.data
 
 import java.sql.Timestamp
 

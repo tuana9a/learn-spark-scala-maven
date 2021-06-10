@@ -1,9 +1,9 @@
-package com.tuana9a.model
+package com.tuana9a.model.data
 
 import java.sql.Timestamp
 
 case class UserData(registration_dttm: Timestamp,
-                    id: Long,
+                    id: Int,
                     first_name: String,
                     last_name: String,
                     email: String,
@@ -12,6 +12,6 @@ case class UserData(registration_dttm: Timestamp,
                     cc: String,
                     country: String,
                     birthdate: String,
-                    salary: String,
+                    salary: Double,
                     title: String,
                     comments: String)

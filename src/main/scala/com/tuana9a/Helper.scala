@@ -9,5 +9,5 @@ object Helper {
 
   def genTimestamp(milliseconds: Long): Timestamp = Timestamp.valueOf(format.format(new Date(milliseconds)))
 
-  def genId(max: Long): Long = (Math.random * max).toLong
+  def genId(max: Int): Int = (Math.random * max).toInt
 }

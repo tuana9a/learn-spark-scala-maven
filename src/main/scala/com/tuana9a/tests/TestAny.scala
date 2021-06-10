@@ -1,11 +1,11 @@
 package com.tuana9a.tests
 
-import com.tuana9a.Main
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.{SparkConf, SparkContext}
 
 object TestAny {
   private val tests = new Array[() => Unit](100)
+
   def run(idx: Any): Unit = {
     tests(idx.toString.toInt)()
   }

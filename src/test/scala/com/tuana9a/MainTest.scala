@@ -17,10 +17,9 @@ class MainTest {
   }
 
   @Test
-  def helloWorld(): Unit = {
+  def HelloWorld(): Unit = {
     println("hello world!")
   }
-
 }
 
 
