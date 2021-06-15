@@ -1,4 +1,4 @@
-package com.tuana9a.process.udafs
+package com.tuana9a.udafs
 
 import org.apache.spark.sql.{Encoder, Encoders}
 import org.apache.spark.sql.expressions.Aggregator
