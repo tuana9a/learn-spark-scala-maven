@@ -3,6 +3,17 @@ package com.tuana9a;
 import java.io.*;
 
 public class Examples {
+    private static final String EXAMPLES_DIR = "/mnt/sda1/RESOURCE/txt/";
+
+    public static void genSingleLine800mb() {
+        String path = EXAMPLES_DIR + "single-line-800mb.txt";
+        Examples.genSingleLine(path, 3, 200000000);
+    }
+
+    public static void genMultiLine800mb() {
+        String path = EXAMPLES_DIR + "multi-line-800mb.txt";
+        Examples.genMultiLine(path, 3, 200000000, 20);
+    }
 
     public static void genMultiLine(String path, int wordLength, int wordNumber, int numWordInLine) {
         File file = new File(path);

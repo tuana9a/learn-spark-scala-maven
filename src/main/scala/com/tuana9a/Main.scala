@@ -1,7 +1,6 @@
 package com.tuana9a
 
-import com.tuana9a.process.WordCountProcess
-import com.tuana9a.tests.{TestAdmicro, TestAny, TestParquet, TestUdafs, TestUdfs}
+import com.tuana9a.tests._
 
 import scala.collection.mutable.ListBuffer
 
@@ -18,7 +17,6 @@ object Main {
   add("TestUdfs", TestUdfs.run)
   add("TestUdafs", TestUdafs.run)
   add("TestParquet", TestParquet.run)
-  add("TestAdmicro", TestAdmicro.run)
 
   def main(args: Array[String]): Unit = {
     val arg0 = args(0)

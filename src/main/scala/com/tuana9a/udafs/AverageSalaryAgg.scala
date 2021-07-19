@@ -3,8 +3,6 @@ package com.tuana9a.udafs
 import org.apache.spark.sql.{Encoder, Encoders}
 import org.apache.spark.sql.expressions.Aggregator
 
-case class TotalSalary(var sum: Double, var count: Long)
-
 object AverageSalaryAgg extends Aggregator[Option[Double], TotalSalary, Double] {
   def zero: TotalSalary = TotalSalary(0L, 0L)
 

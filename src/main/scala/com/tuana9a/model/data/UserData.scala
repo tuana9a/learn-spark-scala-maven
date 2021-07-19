@@ -1,7 +1,6 @@
 package com.tuana9a.model.data
 
 import java.sql.Timestamp
-import java.lang.Double
 
 case class UserData(registration_dttm: Timestamp = null,
                     id: Int = 0,
